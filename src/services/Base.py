@@ -1,6 +1,8 @@
 from supabase import create_client, Client
 import os
 from openai import OpenAI
+
+
 class BaseService:
 
     def supabase_client(self) -> Client:
