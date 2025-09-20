@@ -1,30 +1,24 @@
 
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from src.services.webhook import WebhookService
-
 router = APIRouter()
 
 
 @router.post("/webhook")
-async def upload_file(file: UploadFile = File(...)):
-    """Upload a file to Supabase storage"""
-    webhook_service = WebhookService()
-    
+async def process_file_upload(file: UploadFile = File(...)):
+    """Upload a file, detect spam content, and save to Supabase storage"""
     try:
-        result = await webhook_service.upload_file_to_storage(file)
-        return {
-            "message": "File uploaded successfully",
-            "file_info": {
-                "filename": file.filename,
-                "content_type": file.content_type,
-                "size": file.size
-            },
-            "storage_info": result
-        }
+        print(f"Route received file: {file}")
+        print(f"File type: {type(file)}")
+       
+        
+        webhook_service = WebhookService()
+        result = await webhook_service.process_webhook(file)
+        print(f"Result: {result}")
+        return result
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Error in route: {str(e)}")
+        raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.get("/webhook")
-def get_webhook():
-    return {"message": "Hello World"}

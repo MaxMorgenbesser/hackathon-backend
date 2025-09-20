@@ -10,6 +10,8 @@ supabase = "*"
 pytest = "*"
 python-multipart = "*"
 dotenv = "*"
+openai = "*"
+asyncio = "*"
 
 [dev-packages]
 pytest = "*"
