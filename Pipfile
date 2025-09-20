@@ -6,8 +6,15 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = "*"
+supabase = "*"
+pytest = "*"
+python-multipart = "*"
+dotenv = "*"
+openai = "*"
+asyncio = "*"
 
 [dev-packages]
+pytest = "*"
 
 [requires]
 python_version = "3.9"

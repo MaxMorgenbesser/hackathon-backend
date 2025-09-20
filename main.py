@@ -1,7 +1,10 @@
 from fastapi import FastAPI
+from src.routes import webhook
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
-@app.get("/")
-def read_root():
-    return {"message": "Hello World"}
+
+app.include_router(webhook.router)
