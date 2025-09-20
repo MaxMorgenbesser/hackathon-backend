@@ -25,7 +25,7 @@ class WebhookService(BaseService):
             
             # Upload file to storage
             upload_result = await self.upload_file_to_storage(file)
-            if spam_data.get("is_spam"):
+            if spam_data:
                 self.supabase_client().table("history").insert({
                    "user_id": "123",
                    "file": upload_result.get("public_url", ""),
